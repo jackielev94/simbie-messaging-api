@@ -16,9 +16,7 @@ describe("Test the get all reservations by restaurant id path", () => {
     request(server)
       .get("/restaurants/145e984f-fe71-4c15-9a6f-c6352d138bab/open-reservations")
       .then(response => {
-        console.log("response: ", response.statusCode)
         expect(response.statusCode).toBe(200);
-        // console.log(Array.isArray(response.body));
         expect(Array.isArray(response.body)).toBe(true);
         expect(response.body.length).toEqual(0);
         server.close()
