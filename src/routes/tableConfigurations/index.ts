@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createTableConfigurations } from "./POST-table-configurations"
 
-export const tableConfigurationRouter = Router();
+export const tableConfigurationsRouter = Router();
 
-tableConfigurationRouter.post("/", createTableConfigurations)
+tableConfigurationsRouter.post("/", createTableConfigurations)
