@@ -1,12 +1,13 @@
 import { ReservationsDataProvider } from "../dataProviders";
-import { CreateReservationInput, MakeReservationInput, mapReservationDaoToDto, mapReservationWithTableConfigurationDaoToDto, ReservationDto, ReservationWithTableConfigurationDto } from "../types";
+import { mapReservationDaoToDto, mapReservationWithTableConfigurationDaoToDto, ReservationDto, ReservationWithTableConfigurationDto } from "../types";
+import { CreateReservationRequestInput } from "../types/express";
 
 export class ReservationsService {
   public constructor(
     private readonly reservationsDataProvider: ReservationsDataProvider,
   ) {}
 
-  public async makeReservation(input: MakeReservationInput): Promise<ReservationDto> {
+  public async makeReservation(input: CreateReservationRequestInput): Promise<ReservationDto> {
     const openReservations = await this.getOpenReservationsByRestaurantId(input.restaurantId);
     const filteredReservations = openReservations.filter((res) => {
       return res.startTime === input.startTime

@@ -1,6 +1,7 @@
 import { ReservationsDataProvider, RestaurantsDataProvider, TableConfigurationsDataProvider } from "../dataProviders";
-import { CreateTableConfigurationInput, mapTableConfigurationDaoToDto, RestaurantDao, TableConfigurationDao, TableConfigurationDto, TimeSlot } from "../types";
-import { addTwoHours } from "../util/times";
+import { mapTableConfigurationDaoToDto, RestaurantDao, TableConfigurationDao, TableConfigurationDto, TimeSlot } from "../types";
+import { CreateTableConfigurationsRequestInput } from "../types/express";
+import { addTwoHours } from "../util";
 
 export class TableConfigurationsService {
   public constructor(
@@ -9,11 +10,11 @@ export class TableConfigurationsService {
     private readonly tableConfigurationsDataProvider: TableConfigurationsDataProvider
   ) {}
 
-  public async createTableConfiguration (input: CreateTableConfigurationInput): Promise<Array<TableConfigurationDto>> {
+  public async createTableConfigurations (input: CreateTableConfigurationsRequestInput): Promise<Array<TableConfigurationDto>> {
     const restaurant = await this.restaurantsDataProvider.getRestaurantById(input.restaurantId)
     const timeSlots = this.createTimeSlots(restaurant);
     return Promise.all(input.tableConfigurations.map(async (tableConfig) => {
-      const tableConfiguration = await this.tableConfigurationsDataProvider.createTableConfiguration(tableConfig);
+      const tableConfiguration = await this.tableConfigurationsDataProvider.createTableConfiguration({...tableConfig, restaurantId: input.restaurantId});
       await this.createReservations(timeSlots, tableConfiguration)
       return mapTableConfigurationDaoToDto(tableConfiguration);
     }))

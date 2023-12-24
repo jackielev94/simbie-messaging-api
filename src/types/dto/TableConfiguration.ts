@@ -7,17 +7,6 @@ export interface TableConfigurationDto {
   restaurantId: string;
  }
 
- export interface TableConfigurationInput {
-  seats: number;
-  isIndoor: boolean;
-  restaurantId: string;
- }
-
- export interface CreateTableConfigurationInput {
-  restaurantId: string;
-  tableConfigurations: Array<TableConfigurationInput>
-}
-
 export function mapTableConfigurationDaoToDto(tableConfigDao: TableConfigurationDao): TableConfigurationDto {
   return {
     id: tableConfigDao.id,

@@ -18,22 +18,15 @@ export interface ReservationWithTableConfigurationDto {
   isIndoor: boolean;
 }
 
-export interface CreateReservationInput {
-  startTime: string;
-  endTime: string;
-  tableConfigurationId: string;
-}
-
 export interface UpdateReservationInput {
   id: string;
   open: boolean;
 }
 
-export interface MakeReservationInput {
+export interface CreateReservationInput {
   startTime: string;
-  numPeople: number;
-  isIndoor: boolean;
-  restaurantId: string;
+  endTime: string;
+  tableConfigurationId: string;
 }
 
 export interface TimeSlot {
