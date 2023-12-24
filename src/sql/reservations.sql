@@ -4,6 +4,7 @@ create table reservations (
     primary key (id),
   start_time time not null,
   end_time time not null,
+  open boolean not null default true,
   table_configuration_id uuid not null,
     constraint _fk_reservations_table_configuration_id
     foreign key (table_configuration_id)
