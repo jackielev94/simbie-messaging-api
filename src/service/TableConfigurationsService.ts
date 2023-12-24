@@ -1,7 +1,6 @@
 import { ReservationsDataProvider, RestaurantsDataProvider, TableConfigurationsDataProvider } from "../dataProviders";
 import { mapTableConfigurationDaoToDto, RestaurantDao, TableConfigurationDao, TableConfigurationDto, TimeSlot } from "../types";
 import { CreateTableConfigurationsRequestInput } from "../types/express";
-import { addTwoHours } from "../util";
 
 export class TableConfigurationsService {
   public constructor(
@@ -35,9 +34,8 @@ export class TableConfigurationsService {
     const slots = [];
     // assumption: close time is actually last reservation time
     while (startTime !== restaurant.close_time) {
-      const plusTwoHours = addTwoHours(startTime)
-      slots.push({startTime, endTime: plusTwoHours})
-      startTime = plusTwoHours;
+      slots.push({startTime, endTime: startTime + 2})
+      startTime++;
     }
     return slots;
   }

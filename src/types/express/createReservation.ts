@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { ReservationDto } from "../dto";
 
 export type CreateReservationRequestInput = {
-  startTime: string;
+  startTime: number;
   restaurantId: string;
   numPeople: number;
   isIndoor: boolean;

@@ -5,7 +5,7 @@ import { GetOpenReservationsByRestaurantIdRequest, GetOpenReservationsByRestaura
 import { validatePayload, wrapAsyncHandler } from "../../util";
 
 
-export const getAllReservationsForRestaurant = Router().use(
+export const getAllReservationsForRestaurant = Router({mergeParams: true}).use(
   validatePayload({
     params: {
       id: Joi.string().uuid().required()

@@ -7,7 +7,7 @@ import { validatePayload, wrapAsyncHandler } from "../../util";
 export const makeReservation = Router().use(
   validatePayload({
     body: {
-      startTime: Joi.string().required(),
+      startTime: Joi.number().min(1).max(24).required(),
       restaurantId: Joi.string().uuid().required(),
       numPeople: Joi.number().required(),
       isIndoor: Joi.boolean().required()

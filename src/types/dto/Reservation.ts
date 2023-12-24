@@ -2,16 +2,16 @@ import { ReservationDao, ReservationWithTableConfigurationDao } from "../dao";
 
 export interface ReservationDto {
   id: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   open: boolean;
   tableConfigurationId: string;
 }
 
 export interface ReservationWithTableConfigurationDto {
   id: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   open: boolean;
   tableConfigurationId: string;
   seats: number;
@@ -24,14 +24,14 @@ export interface UpdateReservationInput {
 }
 
 export interface CreateReservationInput {
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   tableConfigurationId: string;
 }
 
 export interface TimeSlot {
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
 }
 
 export function mapReservationDaoToDto(resDao: ReservationDao): ReservationDto {
