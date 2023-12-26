@@ -1,6 +1,6 @@
-import request from "supertest"
-import { server } from "../../app"
-import { CreateReservationRequestInput } from "../../types"
+import request from "supertest";
+import { server } from "../../app";
+import { CreateReservationRequestInput } from "../../types";
 
 const mockReservation: CreateReservationRequestInput = {
   startTime: 10,
@@ -22,6 +22,10 @@ const mockReservationWithNoOpenReservations: CreateReservationRequestInput = {
   isIndoor: true
 }
 
+afterEach(() => {
+  server.close();
+});
+
 describe("Test the put reservation path", () => {
   test("It should respond with an updated reservation and 200 status code, the right location, a number of people between request # and request # +2, and it should no longer be open if reservation was successfully updated", done => {
     request(server)
@@ -33,7 +37,6 @@ describe("Test the put reservation path", () => {
         expect(response.body.isIndoor).toBe(true);
         expect(response.body.seats).toBeLessThanOrEqual(mockReservation.numPeople + 1);
         expect(response.body.seats).toBeGreaterThanOrEqual(mockReservation.numPeople);
-        server.close()
         done();
       });
   });
@@ -44,10 +47,9 @@ describe("Test the put reservation path", () => {
       .then(response => {
         expect(response.error).toBeTruthy();
         if (response.error) {
-          expect(response.error.text).toContain("Validation failed")
+          expect(response.error.text).toContain("Validation failed");
         }
-        expect(response.statusCode).toBe(500)
-        server.close()
+        expect(response.statusCode).toBe(500);
         done();
       });
   });
@@ -58,10 +60,9 @@ describe("Test the put reservation path", () => {
       .then(response => {
         expect(response.error).toBeTruthy();
         if (response.error) {
-          expect(response.error.text).toContain("no reservations")
+          expect(response.error.text).toContain("no reservations");
         }
-        expect(response.statusCode).toBe(400)
-        server.close()
+        expect(response.statusCode).toBe(400);
         done();
       });
   });

@@ -1,5 +1,9 @@
-import request from "supertest"
-import { server } from "../../app"
+import request from "supertest";
+import { server } from "../../app";
+
+afterEach(() => {
+  server.close();
+});
 
 describe("Test the get all reservations by restaurant id path", () => {
   test("It should respond with an array if given a restaurant id with reservations", done => {
@@ -7,8 +11,7 @@ describe("Test the get all reservations by restaurant id path", () => {
       .get("/restaurants/31485766-b5d2-49d1-9c39-698869e2af0a/open-reservations")
       .then(response => {
         expect(response.statusCode).toBe(200);
-        expect(Array.isArray(response.body)).toBe(true)
-        server.close()
+        expect(Array.isArray(response.body)).toBe(true);
         done();
       });
   });
@@ -19,7 +22,6 @@ describe("Test the get all reservations by restaurant id path", () => {
         expect(response.statusCode).toBe(200);
         expect(Array.isArray(response.body)).toBe(true);
         expect(response.body.length).toEqual(0);
-        server.close()
         done();
       });
   });
@@ -30,9 +32,8 @@ describe("Test the get all reservations by restaurant id path", () => {
         expect(response.statusCode).toBe(500);
         expect(response.error).toBeTruthy();
         if (response.error) {
-          expect(response.error.text).toContain("Validation failed")
+          expect(response.error.text).toContain("Validation failed");
         }
-        server.close()
         done();
       });
   });
