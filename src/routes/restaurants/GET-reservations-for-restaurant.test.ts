@@ -1,5 +1,5 @@
 import request from "supertest"
-import { server } from "../app"
+import { server } from "../../app"
 
 describe("Test the get all reservations by restaurant id path", () => {
   test("It should respond with an array if given a restaurant id with reservations", done => {
@@ -19,6 +19,19 @@ describe("Test the get all reservations by restaurant id path", () => {
         expect(response.statusCode).toBe(200);
         expect(Array.isArray(response.body)).toBe(true);
         expect(response.body.length).toEqual(0);
+        server.close()
+        done();
+      });
+  });
+  test("It should respond with a validation error if given a restaurant id that is not a valid uuid", done => {
+    request(server)
+      .get("/restaurants/1/open-reservations")
+      .then(response => {
+        expect(response.statusCode).toBe(500);
+        expect(response.error).toBeTruthy();
+        if (response.error) {
+          expect(response.error.text).toContain("Validation failed")
+        }
         server.close()
         done();
       });

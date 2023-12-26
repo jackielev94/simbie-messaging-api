@@ -33,9 +33,18 @@ export class ReservationsDataProvider {
     );
   }
 
+  public async getReservationWithTableConfigurationById(reservationId: string): Promise<ReservationWithTableConfigurationDao> {
+    const query = `
+      select res.*, tc.is_indoor, tc.seats from ${reservations_table_name} res
+      join ${table_configurations_table_name} tc on res.table_configuration_id = tc.id
+      where res.id = $1
+    `
+    return simpleQuerySingleResult(query, [ reservationId ]);
+  }
+
   public async getOpenReservationsByRestaurantId(restaurantId: string): Promise<Array<ReservationWithTableConfigurationDao>> {
     const query = `
-      select res.*, tc.seats, tc. is_indoor
+      select res.*, tc.seats, tc.is_indoor
       from ${reservations_table_name} res
       join ${table_configurations_table_name} tc on res.table_configuration_id = tc.id
       join ${restaurants_table_name} rest on tc.restaurant_id = rest.id

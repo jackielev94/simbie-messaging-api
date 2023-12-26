@@ -18,8 +18,12 @@ export const makeReservation = Router().use(
       req: CreateReservationRequest,
       res: CreateReservationResponse
     ) => {
-      const updatedReservation = await reservationsServiceInstance.makeReservation(req.body)
-      res.status(200).send(updatedReservation)
+      try {
+        const updatedReservation = await reservationsServiceInstance.makeReservation(req.body);
+        res.status(200).send(updatedReservation)
+      } catch(err) {
+        res.status(400).send(err.message);
+      }
     }
   )
 );

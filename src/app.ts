@@ -6,6 +6,4 @@ const port = 3000;
 app.use(express.json());
 app.use("/", rootRouter);
 
-export const server = app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`);
-});
+export const server = app.listen(port, () => {});

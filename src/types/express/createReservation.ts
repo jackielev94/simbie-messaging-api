@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { ReservationDto } from "../dto";
+import { ReservationWithTableConfigurationDto } from "../dto";
 
 export type CreateReservationRequestInput = {
   startTime: number;
@@ -14,6 +14,6 @@ export type CreateReservationRequest = Request<
   CreateReservationRequestInput
 >;
 
-export type CreateReservationResponseBody = ReservationDto;
+export type CreateReservationResponseBody = ReservationWithTableConfigurationDto;
 
 export type CreateReservationResponse = Response<CreateReservationResponseBody>
