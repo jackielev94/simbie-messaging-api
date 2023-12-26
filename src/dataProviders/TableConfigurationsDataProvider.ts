@@ -1,9 +1,9 @@
 import { simpleQuerySingleResult } from "../db";
-import { CreateTableConfigurationInput, TableConfigurationDao } from "../types";
+import { CreateTableConfigurationDbInput, TableConfigurationDao } from "../types";
 import { table_configurations_table_name } from "./constants";
 
 export class TableConfigurationsDataProvider {
-  public async createTableConfiguration(input: CreateTableConfigurationInput): Promise<TableConfigurationDao> {
+  public async createTableConfiguration(input: CreateTableConfigurationDbInput): Promise<TableConfigurationDao> {
     const query = `
       insert into ${table_configurations_table_name}
       (seats, is_indoor, restaurant_id)

@@ -1,6 +1,6 @@
 import { TableConfigurationDao } from "../dao";
 
-export interface CreateTableConfigurationInput {
+export interface CreateTableConfigurationDbInput {
   seats: number;
   isIndoor: boolean;
   restaurantId: string;
