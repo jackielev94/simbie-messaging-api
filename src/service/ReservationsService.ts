@@ -33,10 +33,15 @@ export class ReservationsService {
 
   private filterReservationsByRequestDetails(openReservations: Array<ReservationWithTableConfigurationDto>, input: CreateReservationRequestInput): Array<ReservationWithTableConfigurationDto> {
     return openReservations.filter((res) => {
-      return res.startTime === input.startTime
-      && res.seats >= input.numPeople
-      && res.seats <= input.numPeople + 1
-      && res.isIndoor === input.isIndoor;
+      return (
+        // reservation should begin at provided start time
+        res.startTime === input.startTime
+        // reservation seats should be between given number of people and 1 + given number of people (i.e. if 3, between 3 and 4)
+        && res.seats >= input.numPeople
+        && res.seats <= input.numPeople + 1
+        // reservation should be in provided location
+        && res.isIndoor === input.isIndoor
+      )
     });
   }
 
