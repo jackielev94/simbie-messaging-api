@@ -32,7 +32,6 @@ export class TableConfigurationsService {
   public createTimeSlots(restaurant: RestaurantDao):Array<TimeSlot> {
     let startTime = restaurant.open_time
     const slots = [];
-    // assumption: close time is actually last reservation time
     while (startTime !== restaurant.close_time - 1) {
       slots.push({startTime, endTime: startTime + 2})
       startTime++;
