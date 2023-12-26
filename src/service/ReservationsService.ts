@@ -9,12 +9,7 @@ export class ReservationsService {
 
   public async makeReservation(input: CreateReservationRequestInput): Promise<ReservationWithTableConfigurationDto> {
     const openReservations = await this.getOpenReservationsByRestaurantId(input.restaurantId);
-    const filteredReservations = openReservations.filter((res) => {
-      return res.startTime === input.startTime
-      && res.seats >= input.numPeople
-      && res.seats <= input.numPeople + 1
-      && res.isIndoor === input.isIndoor;
-    });
+    const filteredReservations = this.filterReservationsByRequestDetails(openReservations, input);
     if (filteredReservations.length) {
       const updatedReservation = await this.reservationsDataProvider.updateReservation({
         // this will take the reservation with the lowest number of seats, correct location, and correct start time from the filtered list
@@ -34,6 +29,15 @@ export class ReservationsService {
   public async getReservationWithTableConfigurationById(reservationId: string): Promise<ReservationWithTableConfigurationDto> {
     const reservation = await this.reservationsDataProvider.getReservationWithTableConfigurationById(reservationId);
     return mapReservationWithTableConfigurationDaoToDto(reservation);
+  }
+
+  private filterReservationsByRequestDetails(openReservations: Array<ReservationWithTableConfigurationDto>, input: CreateReservationRequestInput): Array<ReservationWithTableConfigurationDto> {
+    return openReservations.filter((res) => {
+      return res.startTime === input.startTime
+      && res.seats >= input.numPeople
+      && res.seats <= input.numPeople + 1
+      && res.isIndoor === input.isIndoor;
+    });
   }
 
 }
