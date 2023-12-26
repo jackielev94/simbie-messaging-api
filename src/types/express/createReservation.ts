@@ -16,4 +16,4 @@ export type CreateReservationRequest = Request<
 
 export type CreateReservationResponseBody = ReservationWithTableConfigurationDto;
 
-export type CreateReservationResponse = Response<CreateReservationResponseBody>
+export type CreateReservationResponse = Response<CreateReservationResponseBody>;

@@ -19,4 +19,4 @@ export type CreateTableConfigurationsRequest = Request<
 
 export type CreateTableConfigurationsResponseBody = Array<TableConfigurationDto>;
 
-export type CreateTableConfigurationsResponse = Response<CreateTableConfigurationsResponseBody>
+export type CreateTableConfigurationsResponse = Response<CreateTableConfigurationsResponseBody>;

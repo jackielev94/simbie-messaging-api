@@ -1,12 +1,6 @@
 import { simpleQuerySingleResult } from "../db";
-import { TableConfigurationDao } from "../types";
+import { CreateTableConfigurationInput, TableConfigurationDao } from "../types";
 import { table_configurations_table_name } from "./constants";
-
-interface CreateTableConfigurationInput {
-  seats: number;
-  isIndoor: boolean;
-  restaurantId: string;
-}
 
 export class TableConfigurationsDataProvider {
   public async createTableConfiguration(input: CreateTableConfigurationInput): Promise<TableConfigurationDao> {
@@ -19,7 +13,7 @@ export class TableConfigurationsDataProvider {
       [
         input.seats,
         input.isIndoor,
-        input.restaurantId
+        input.restaurantId,
       ]
     );
   }

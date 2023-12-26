@@ -1,4 +1,4 @@
-import { ReservationsService, TableConfigurationsService } from "../service"
+import { ReservationsService, TableConfigurationsService } from "../service";
 import { reservationsDataProviderInstance, restaurantsDataProviderInstance, tableConfigurationsDataProviderInstance } from "./dataProviders";
 
 const reservationsServiceInstance = new ReservationsService(reservationsDataProviderInstance);

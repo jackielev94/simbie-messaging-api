@@ -1,4 +1,4 @@
-import { ReservationsDataProvider, RestaurantsDataProvider, TableConfigurationsDataProvider } from "../dataProviders"
+import { ReservationsDataProvider, RestaurantsDataProvider, TableConfigurationsDataProvider } from "../dataProviders";
 
 const restaurantsDataProviderInstance = new RestaurantsDataProvider();
 const reservationsDataProviderInstance = new ReservationsDataProvider();

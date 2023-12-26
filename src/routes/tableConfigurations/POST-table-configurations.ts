@@ -21,8 +21,12 @@ export const createTableConfigurations = Router().use(
       req: CreateTableConfigurationsRequest,
       res: CreateTableConfigurationsResponse
     ) => {
-      const tableConfigurations = await tableConfigurationsServiceInstance.createTableConfigurations(req.body);
-      res.status(201).send(tableConfigurations)
+      try {
+        const tableConfigurations = await tableConfigurationsServiceInstance.createTableConfigurations(req.body);
+        res.status(201).send(tableConfigurations);
+      } catch(err) {
+        res.status(400).send(err.message);
+      }
     }
   )
 );

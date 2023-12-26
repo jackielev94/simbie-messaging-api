@@ -16,8 +16,12 @@ export const getAllReservationsForRestaurant = Router({mergeParams: true}).use(
       req: GetOpenReservationsByRestaurantIdRequest,
       res: GetOpenReservationsByRestaurantIdResponse
     ) => {
-      const reservations = await reservationsServiceInstance.getOpenReservationsByRestaurantId(req.params.id)
-      res.status(200).send(reservations)
+      try {
+        const reservations = await reservationsServiceInstance.getOpenReservationsByRestaurantId(req.params.id);
+        res.status(200).send(reservations);
+      } catch(err) {
+        res.status(400).send(err.message);
+      }
     }
   )
 );

@@ -8,12 +8,12 @@ export class ReservationsDataProvider {
       insert into ${reservations_table_name}
       (start_time, end_time, table_configuration_id)
       values ($1, $2, $3) returning *
-    `
+    `;
     return simpleQuerySingleResult(query,
       [
         input.startTime,
         input.endTime,
-        input.tableConfigurationId
+        input.tableConfigurationId,
       ]
     );
   }
@@ -24,7 +24,7 @@ export class ReservationsDataProvider {
       set open = $1
       where id = $2
       returning *
-    `
+    `;
     return simpleQuerySingleResult(query,
       [
         input.open,
@@ -38,8 +38,8 @@ export class ReservationsDataProvider {
       select res.*, tc.is_indoor, tc.seats from ${reservations_table_name} res
       join ${table_configurations_table_name} tc on res.table_configuration_id = tc.id
       where res.id = $1
-    `
-    return simpleQuerySingleResult(query, [ reservationId ]);
+    `;
+    return simpleQuerySingleResult(query, [ reservationId, ]);
   }
 
   public async getOpenReservationsByRestaurantId(restaurantId: string): Promise<Array<ReservationWithTableConfigurationDao>> {
@@ -51,6 +51,6 @@ export class ReservationsDataProvider {
       where rest.id = $1 and res.open = true
       order by tc.seats
     `;
-    return simpleQuery(query, [ restaurantId ])
+    return simpleQuery(query, [ restaurantId, ])
   }
 }

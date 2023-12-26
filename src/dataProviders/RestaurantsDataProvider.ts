@@ -8,7 +8,7 @@ export class RestaurantsDataProvider {
     const query = `
       select * from ${restaurants_table_name}
       where id = $1
-    `
-    return simpleQuerySingleResult(query, [id])
+    `;
+    return simpleQuerySingleResult(query, [ id, ])
   }
 }

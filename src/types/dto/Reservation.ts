@@ -52,6 +52,6 @@ export function mapReservationWithTableConfigurationDaoToDto(resDao: Reservation
     open: resDao.open,
     tableConfigurationId: resDao.table_configuration_id,
     seats: resDao.seats,
-    isIndoor: resDao.is_indoor
+    isIndoor: resDao.is_indoor,
   }
 }

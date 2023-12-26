@@ -17,6 +17,7 @@ export class ReservationsService {
     });
     if (filteredReservations.length) {
       const updatedReservation = await this.reservationsDataProvider.updateReservation({
+        // this will take the reservation with the lowest number of seats, correct location, and correct start time from the filtered list
         id: filteredReservations[0].id,
         open: false
       });

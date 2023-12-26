@@ -7,11 +7,8 @@ export type GetOpenReservationsByRestaurantIdRequestParams = {
 
 export type GetOpenReservationsByRestaurantIdRequest = Request<
 GetOpenReservationsByRestaurantIdRequestParams
-  // never,
-  // never,
-  // GetOpenReservationsByRestaurantIdRequestParams
 >;
 
 export type GetOpenReservationsByRestaurantIdResponseBody = Array<ReservationWithTableConfigurationDto>;
 
-export type GetOpenReservationsByRestaurantIdResponse = Response<GetOpenReservationsByRestaurantIdResponseBody>
+export type GetOpenReservationsByRestaurantIdResponse = Response<GetOpenReservationsByRestaurantIdResponseBody>;

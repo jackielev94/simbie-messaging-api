@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { makeReservation } from "./PUT-reservation"
+import { makeReservation } from "./PUT-reservation";
 
 export const reservationsRouter = Router();
 
-reservationsRouter.put("/", makeReservation)
+reservationsRouter.put("/", makeReservation);
