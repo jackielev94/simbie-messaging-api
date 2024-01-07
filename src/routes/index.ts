@@ -1,11 +1,8 @@
 import { Router } from "express";
-import { reservationsRouter } from "./reservations";
-import { restaurantsRouter } from "./restaurants";
-import { tableConfigurationsRouter } from "./tableConfigurations";
-
+import { messagesRouter } from "./messages";
+import { personsRouter } from "./persons";
 
 export const rootRouter = Router();
 
-rootRouter.use("/restaurants", restaurantsRouter);
-rootRouter.use("/reservations", reservationsRouter);
-rootRouter.use("/table-configurations", tableConfigurationsRouter);
+rootRouter.use("/messages", messagesRouter);
+rootRouter.use("/persons", personsRouter)

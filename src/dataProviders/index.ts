@@ -1,3 +1,2 @@
-export * from "./ReservationsDataProvider";
-export * from "./RestaurantsDataProvider";
-export * from "./TableConfigurationsDataProvider";
+export * from "./MessagesDataProvider";
+export * from "./ThreadsDataProvider";

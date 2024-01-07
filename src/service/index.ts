@@ -1,2 +1,2 @@
-export * from "./ReservationsService";
-export * from "./TableConfigurationsService";
+export * from "./MessagesService";
+export * from "./ThreadsService";

@@ -1,11 +1,9 @@
-import { ReservationsDataProvider, RestaurantsDataProvider, TableConfigurationsDataProvider } from "../dataProviders";
+import { MessagesDataProvider, ThreadsDataProvider } from "../dataProviders";
 
-const restaurantsDataProviderInstance = new RestaurantsDataProvider();
-const reservationsDataProviderInstance = new ReservationsDataProvider();
-const tableConfigurationsDataProviderInstance = new TableConfigurationsDataProvider();
+const messagesDataProviderInstance = new MessagesDataProvider();
+const threadsDataProviderInstance = new ThreadsDataProvider();
 
 export {
-  reservationsDataProviderInstance,
-  restaurantsDataProviderInstance,
-  tableConfigurationsDataProviderInstance
+  messagesDataProviderInstance,
+  threadsDataProviderInstance
 }

@@ -1,10 +1,9 @@
-import { ReservationsService, TableConfigurationsService } from "../service";
-import { reservationsDataProviderInstance, restaurantsDataProviderInstance, tableConfigurationsDataProviderInstance } from "./dataProviders";
+import { MessagesService } from "../service";
+import { messagesDataProviderInstance, threadsDataProviderInstance } from "./dataProviders";
 
-const reservationsServiceInstance = new ReservationsService(reservationsDataProviderInstance);
-const tableConfigurationsServiceInstance = new TableConfigurationsService(restaurantsDataProviderInstance, reservationsDataProviderInstance, tableConfigurationsDataProviderInstance);
+const messagesServiceInstance = new MessagesService(messagesDataProviderInstance, threadsDataProviderInstance);
+const threadsServiceInstance = new ThreadsService()
 
 export {
-  reservationsServiceInstance,
-  tableConfigurationsServiceInstance
+  messagesServiceInstance
 }

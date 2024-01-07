@@ -1,4 +1,6 @@
 
-export const reservations_table_name = "reservations";
-export const restaurants_table_name = "restaurants";
-export const table_configurations_table_name = "table_configurations";
+export const messages_table_name = "messages";
+export const threads_table_name = "threads";
+export const messages_persons_table_name = "messages_persons";
+export const threads_persons_table_name = "threads_persons";
+export const persons_table_name = "persons";

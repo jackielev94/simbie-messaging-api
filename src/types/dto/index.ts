@@ -1,3 +1,2 @@
-export * from "./Reservation";
-export * from "./Restaurant";
-export * from "./TableConfiguration";
+export * from "./Message";
+export * from "./Thread";
