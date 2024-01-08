@@ -18,7 +18,7 @@ export const login = Router({mergeParams: true}).use(
       res: LoginResponse
     ) => {
       try {
-        const success = await authenticationServiceInstance.login(req.query);
+        const success = await authenticationServiceInstance.getAccountByEmailAndPassword(req.query);
         if (success) {
           res.status(200).send(success);
         } else {
