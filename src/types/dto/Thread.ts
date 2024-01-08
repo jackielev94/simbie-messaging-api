@@ -1,4 +1,3 @@
-// import { ThreadDao } from "../dao";
 import { MessageWithPersonsDto } from "../dto"
 
 export interface ThreadDto {
@@ -11,13 +10,3 @@ export interface ThreadWithMessagesDto {
   created: string;
   messages: Array<MessageWithPersonsDto>
 }
-
-// export function mapMessageDaoToDto(messageDao: MessageDao): MessageDto {
-//   return {
-//     id: messageDao.id,
-//     content: messageDao.content,
-//     threadId: messageDao.thread_id,
-//     created: messageDao.created,
-//     read: messageDao.read
-//   }
-// }

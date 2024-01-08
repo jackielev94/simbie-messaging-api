@@ -1,4 +1,4 @@
-import { ThreadWithMessagesDto } from "../types";
+import { MessageDao, MessageWithPersonsDto, ThreadWithMessagesDto, TypeOfMessagePerson } from "../types";
 import { MessagesDataProvider, ThreadsDataProvider } from "../dataProviders";
 
 export class ThreadsService {
@@ -9,11 +9,26 @@ export class ThreadsService {
 
   public async getThreadsWithMessagesByPersonId(personId: string): Promise<Array<ThreadWithMessagesDto>> {
     const threads = await this.threadsDataProvider.getThreadsWithMessagesByPersonId(personId);
-    return Promise.all(threads.map((thread) => {
+    return Promise.all(threads.map(async (thread) => {
+      const messages = await this.messagesDataProvider.getMessagesByThreadId(thread.id);
+      const messagesWithPersons = await this.getMessagesWithPersons(messages);
       return {
         id: thread.id,
         created: thread.created,
-        messages: (mapMessageWithPersonDaoToDto(this.messagesDataProvider.getMessagesByThreadId(thread.id)))
+        messages: messagesWithPersons
+      }
+    }))
+  }
+
+  public async getMessagesWithPersons(messages: Array<MessageDao>): Promise<Array<MessageWithPersonsDto>> {
+    return Promise.all(messages.map(async (message) => {
+      const messagePersons = await this.messagesDataProvider.getMessagesPersonsByMessageId(message.id);
+
+      return {
+        ...message,
+        threadId: message.thread_id,
+        senderId: messagePersons.find((messagePerson) => messagePerson.type_of_message_person === TypeOfMessagePerson.SENDER).person_id,
+        recipientId: messagePersons.find((messagePerson) => messagePerson.type_of_message_person === TypeOfMessagePerson.RECIPIENT).person_id
       }
     }))
   }

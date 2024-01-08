@@ -1,5 +1,5 @@
-import { simpleQuerySingleResult } from "../db";
-import { MessageDao, MessagePersonDao, CreateMessageInput, CreateMessagePersonInput } from "../types";
+import { simpleQuery, simpleQuerySingleResult } from "../db";
+import { MessageDao, MessagePersonDao, CreateMessageInput, CreateMessagePersonInput, UpdateMessageInput } from "../types";
 import { messages_persons_table_name, messages_table_name } from "./constants";
 
 export class MessagesDataProvider {
@@ -29,6 +29,31 @@ export class MessagesDataProvider {
         input.messageId,
         input.typeOfMessagePerson
       ]
-  );
+    );
+  }
+
+  public async getMessagesByThreadId(threadId: string): Promise<Array<MessageDao>> {
+    const query = `
+      select * from ${messages_table_name}
+      where thread_id = $1
+    `;
+    return simpleQuery(query, [ threadId ]);
+  }
+
+  public async getMessagesPersonsByMessageId(messageId: string): Promise<Array<MessagePersonDao>> {
+    const query = `
+      select * from ${messages_persons_table_name}
+      where message_id = $1
+    `;
+    return simpleQuery(query, [ messageId ]);
+  }
+
+  public async updateMessage(input: UpdateMessageInput, messageId: string): Promise<MessageDao> {
+    const query = `
+      update ${messages_table_name}
+      set read = $1
+      where message_id = $2
+    `;
+    return simpleQuery(query, [ input.read, messageId ]);
   }
 }

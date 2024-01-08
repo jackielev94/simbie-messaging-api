@@ -1,6 +1,6 @@
 import { simpleQuery, simpleQuerySingleResult } from "../db";
-import { ThreadDao, ThreadPersonDao, ThreadWithMessagesDao } from "../types";
-import { threads_table_name, threads_persons_table_name, messages_table_name, messages_persons_table_name, persons_table_name } from "./constants";
+import { ThreadDao, ThreadPersonDao } from "../types";
+import { threads_table_name, threads_persons_table_name } from "./constants";
 
 export class ThreadsDataProvider {
   public async createThread(): Promise<ThreadDao> {

@@ -29,6 +29,10 @@ export interface CreateMessagePersonInput {
   typeOfMessagePerson: TypeOfMessagePerson
 }
 
+export interface UpdateMessageInput {
+  read: boolean;
+}
+
 export function mapMessageDaoToDto(messageDao: MessageDao): MessageDto {
   return {
     id: messageDao.id,

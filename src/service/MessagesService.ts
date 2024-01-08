@@ -1,4 +1,4 @@
-import { CreateMessageRequestInput, mapMessageDaoToDto, MessageDto, TypeOfMessagePerson } from "../types";
+import { CreateMessageRequestInput, mapMessageDaoToDto, MessageDto, TypeOfMessagePerson, UpdateMessageRequestInput } from "../types";
 import { MessagesDataProvider, ThreadsDataProvider } from "../dataProviders";
 
 export class MessagesService {
@@ -31,5 +31,9 @@ export class MessagesService {
     await this.threadsDataProvider.createThreadPerson(thread.id, input.senderId);
     await this.threadsDataProvider.createThreadPerson(thread.id, input.recipientId);
     return thread.id;
+  }
+
+  public async updateMessage(input: UpdateMessageRequestInput, messageId: string): Promise<MessageDto> {
+    return mapMessageDaoToDto(await this.messagesDataProvider.updateMessage(input, messageId));
   }
 }

@@ -1,9 +1,12 @@
-import { MessagesService } from "../service";
-import { messagesDataProviderInstance, threadsDataProviderInstance } from "./dataProviders";
+import { AuthenticationService, MessagesService, ThreadsService } from "../service";
+import { accountsDataProviderInstance, messagesDataProviderInstance, threadsDataProviderInstance } from "./dataProviders";
 
 const messagesServiceInstance = new MessagesService(messagesDataProviderInstance, threadsDataProviderInstance);
-const threadsServiceInstance = new ThreadsService()
+const threadsServiceInstance = new ThreadsService(threadsDataProviderInstance, messagesDataProviderInstance)
+const authenticationServiceInstance = new AuthenticationService(accountsDataProviderInstance);
 
 export {
-  messagesServiceInstance
+  messagesServiceInstance,
+  threadsServiceInstance,
+  authenticationServiceInstance
 }

@@ -4,13 +4,16 @@ export type LoginSuccess = {
   success: boolean;
 }
 
-export type LoginRequestParams = {
-  username: string;
+export type LoginRequestQuery = {
+  email: string;
   password: string;
 }
 
 export type LoginRequest = Request<
-LoginRequestParams
+never,
+never,
+never,
+LoginRequestQuery
 >;
 
 export type LoginResponseBody = LoginSuccess;
