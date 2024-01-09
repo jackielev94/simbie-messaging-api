@@ -11,7 +11,9 @@ export class ThreadsService {
     const threads = await this.threadsDataProvider.getThreadsWithMessagesByPersonId(personId);
     return Promise.all(threads.map(async (thread) => {
       const messages = await this.messagesDataProvider.getMessagesByThreadId(thread.id);
+      console.log("messages: ", messages)
       const messagesWithPersons = await this.getMessagesWithPersons(messages);
+      console.log("1")
       return {
         id: thread.id,
         created: thread.created,
@@ -23,12 +25,16 @@ export class ThreadsService {
   public async getMessagesWithPersons(messages: Array<MessageDao>): Promise<Array<MessageWithPersonsDto>> {
     return Promise.all(messages.map(async (message) => {
       const messagePersons = await this.messagesDataProvider.getMessagesPersonsByMessageId(message.id);
-
+      const sender = messagePersons.find(mp => mp.person_role === TypeOfMessagePerson.SENDER);
+      const recipient = messagePersons.find(mp => mp.person_role === TypeOfMessagePerson.RECIPIENT);
       return {
-        ...message,
+        id: message.id,
+        content: message.content,
+        created: message.created,
+        read: message.read,
         threadId: message.thread_id,
-        senderId: messagePersons.find((messagePerson) => messagePerson.type_of_message_person === TypeOfMessagePerson.SENDER).person_id,
-        recipientId: messagePersons.find((messagePerson) => messagePerson.type_of_message_person === TypeOfMessagePerson.RECIPIENT).person_id
+        senderId: sender.person_id,
+        recipientId: recipient.person_id
       }
     }))
   }

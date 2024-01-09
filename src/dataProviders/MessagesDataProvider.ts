@@ -20,7 +20,7 @@ export class MessagesDataProvider {
   public async createMessagePerson(input: CreateMessagePersonInput): Promise<MessagePersonDao> {
     const query = `
       insert into ${messages_persons_table_name}
-      (person_id, message_id, type_of_message_person)
+      (person_id, message_id, person_role)
       values ($1, $2, $3) returning *
     `;
     return simpleQuerySingleResult(query,
@@ -52,8 +52,9 @@ export class MessagesDataProvider {
     const query = `
       update ${messages_table_name}
       set read = $1
-      where message_id = $2
+      where id = $2
+      returning *
     `;
-    return simpleQuery(query, [ input.read, messageId ]);
+    return simpleQuerySingleResult(query, [ input.read, messageId ]);
   }
 }

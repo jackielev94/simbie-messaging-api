@@ -4,7 +4,7 @@ import { messagesServiceInstance } from "../../dependencyInjection";
 import { UpdateMessageRequest, UpdateMessageResponse } from "../../types/express";
 import { validatePayload, wrapAsyncHandler } from "../../util";
 
-export const updateMessage = Router().use(
+export const updateMessage = Router({mergeParams: true}).use(
   validatePayload({
     body: Joi.object({
       read: Joi.boolean().required(),
@@ -20,7 +20,7 @@ export const updateMessage = Router().use(
     ) => {
       try {
         const message = await messagesServiceInstance.updateMessage(req.body, req.params.id);
-        res.status(201).send(message);
+        res.status(200).send(message);
       } catch(err) {
         res.status(400).send(err.message);
       }

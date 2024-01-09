@@ -8,9 +8,9 @@ export const createMessage = Router().use(
   validatePayload({
     body: Joi.object({
       content: Joi.string().required(),
-      thread_id: Joi.string().uuid(),
-      sender_id: Joi.string().uuid().required(),
-      recipient_id: Joi.string().uuid().required()
+      threadId: Joi.string().uuid(),
+      senderId: Joi.string().uuid().required(),
+      recipientId: Joi.string().uuid().required()
     })
   }),
   wrapAsyncHandler(

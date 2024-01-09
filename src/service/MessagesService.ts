@@ -34,6 +34,7 @@ export class MessagesService {
   }
 
   public async updateMessage(input: UpdateMessageRequestInput, messageId: string): Promise<MessageDto> {
-    return mapMessageDaoToDto(await this.messagesDataProvider.updateMessage(input, messageId));
+    const updatedMessage = await this.messagesDataProvider.updateMessage(input, messageId);
+    return mapMessageDaoToDto(updatedMessage);
   }
 }

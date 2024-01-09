@@ -3,4 +3,4 @@ import { getThreadsWithMessages } from "./GET-person-threads";
 
 export const personsRouter = Router();
 
-personsRouter.post("/:id/threads", getThreadsWithMessages);
+personsRouter.get("/:id/threads", getThreadsWithMessages);
