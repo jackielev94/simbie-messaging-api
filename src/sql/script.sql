@@ -2,62 +2,27 @@ create database simbie_take_home;
 
 create EXTENSION if not exists "uuid-ossp";
 
+create type type_of_account as enum (
+  'PATIENT',
+  'PROVIDER'
+);
+
 create table accounts (
   id uuid not null default uuid_generate_v4(),
     constraint _pk_accounts
     primary key (id),
   email text not null,
   password text not null,
-  created timestamp with time zone not null default current_timestamp
-);
-
-create table persons (
-  id uuid not null default uuid_generate_v4(),
-    constraint _pk_persons
-    primary key (id),
-  email text not null,
-  name_first text not null,
-  name_last text not null,
-  phone text not null,
-  account_id uuid not null,
-    constraint _fk_persons_account_id
-    foreign key (account_id)
-    references accounts,
-  created timestamp with time zone not null default current_timestamp
-);
-
-create type type_of_provider as enum (
-  'NURSE_PRACTITIONER'
-);
-
-create table providers (
-  id uuid not null default uuid_generate_v4(),
-    constraint _pk_providers
-    primary key (id),
-  role type_of_provider,
-  person_id uuid not null,
-    constraint _fk_providers_person_id
-    foreign key (person_id)
-    references persons,
-  created timestamp with time zone not null default current_timestamp
-);
-
-create table patients (
-  id uuid not null default uuid_generate_v4(),
-    constraint _pk_patients
-    primary key (id),
-  person_id uuid not null,
-    constraint _fk_patients_person_id
-    foreign key (person_id)
-    references persons,
-  created timestamp with time zone not null default current_timestamp
+  created timestamp with time zone not null default current_timestamp,
+  role type_of_account not null
 );
 
 create table threads (
   id uuid not null default uuid_generate_v4(),
     constraint _pk_threads
     primary key (id),
-  created timestamp with time zone not null default current_timestamp
+  created timestamp with time zone not null default current_timestamp,
+  subject text not null default 'Empty Subject'
 );
 
 create table messages (

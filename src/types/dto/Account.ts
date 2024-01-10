@@ -1,4 +1,4 @@
-import { AccountWithPersonDao } from "../dao";
+import { AccountWithPersonDao, TypeOfAccount } from "../dao";
 
 export interface AccountWithPersonDto {
   accountId: string;
@@ -7,6 +7,7 @@ export interface AccountWithPersonDto {
   nameFirst: string;
   nameLast: string;
   phone: string;
+  role: TypeOfAccount;
 }
 
 export function mapAccountWithPersonDaoToDto(accountDao: AccountWithPersonDao): AccountWithPersonDto {
@@ -16,6 +17,7 @@ export function mapAccountWithPersonDaoToDto(accountDao: AccountWithPersonDao): 
     email: accountDao.email,
     nameFirst: accountDao.name_first,
     nameLast: accountDao.name_last,
-    phone: accountDao.phone
+    phone: accountDao.phone,
+    role: accountDao.role
   }
 }

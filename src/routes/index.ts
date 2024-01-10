@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { accountsRouter } from "./accounts";
 import { authenticationRouter } from "./authentication";
 import { messagesRouter } from "./messages";
 import { personsRouter } from "./persons";
@@ -10,3 +11,4 @@ rootRouter.use("/messages", messagesRouter);
 rootRouter.use("/persons", personsRouter)
 rootRouter.use("/authentication", authenticationRouter)
 rootRouter.use("/threads", threadsRouter)
+rootRouter.use("/accounts", accountsRouter)
