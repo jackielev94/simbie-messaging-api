@@ -36,6 +36,7 @@ export class MessagesDataProvider {
     const query = `
       select * from ${messages_table_name}
       where thread_id = $1
+      order by created desc
     `;
     return simpleQuery(query, [ threadId ]);
   }
