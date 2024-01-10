@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { MessageDto } from "../dto";
+import { MessageWithPersonsDto } from "../dto";
 
 export type CreateMessageRequestInput = {
   content: string;
@@ -14,6 +14,6 @@ export type CreateMessageRequest = Request<
   CreateMessageRequestInput
 >;
 
-export type CreateMessageResponseBody = MessageDto;
+export type CreateMessageResponseBody = MessageWithPersonsDto;
 
 export type CreateMessageResponse = Response<CreateMessageResponseBody>;

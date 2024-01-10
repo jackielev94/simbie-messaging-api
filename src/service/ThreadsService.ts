@@ -11,9 +11,7 @@ export class ThreadsService {
     const threads = await this.threadsDataProvider.getThreadsWithMessagesByPersonId(personId);
     return Promise.all(threads.map(async (thread) => {
       const messages = await this.messagesDataProvider.getMessagesByThreadId(thread.id);
-      console.log("messages: ", messages)
       const messagesWithPersons = await this.getMessagesWithPersons(messages);
-      console.log("1")
       return {
         id: thread.id,
         created: thread.created,
@@ -33,8 +31,16 @@ export class ThreadsService {
         created: message.created,
         read: message.read,
         threadId: message.thread_id,
-        senderId: sender.person_id,
-        recipientId: recipient.person_id
+        sender: {
+          id: sender.person_id,
+          nameFirst: sender.name_first,
+          nameLast: sender.name_last,
+        },
+        recipient: {
+          id: recipient.person_id,
+          nameFirst: recipient.name_first,
+          nameLast: recipient.name_last,
+        }
       }
     }))
   }

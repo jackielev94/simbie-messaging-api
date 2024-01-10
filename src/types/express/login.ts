@@ -1,7 +1,9 @@
 import type { Request, Response } from "express";
+import { AccountWithPersonDto } from "../dto";
 
 export type LoginSuccess = {
   success: boolean;
+  account?: AccountWithPersonDto
 }
 
 export type LoginRequestQuery = {

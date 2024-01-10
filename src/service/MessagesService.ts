@@ -1,4 +1,4 @@
-import { CreateMessageRequestInput, mapMessageDaoToDto, MessageDto, TypeOfMessagePerson, UpdateMessageRequestInput } from "../types";
+import { CreateMessageRequestInput, mapMessageWithPersonDaoToDto, MessageWithPersonsDto, TypeOfMessagePerson, UpdateMessageRequestInput } from "../types";
 import { MessagesDataProvider, ThreadsDataProvider } from "../dataProviders";
 
 export class MessagesService {
@@ -7,23 +7,23 @@ export class MessagesService {
     private readonly threadsDataProvider: ThreadsDataProvider
   ) {}
 
-  public async createMessage(input: CreateMessageRequestInput): Promise<MessageDto> {
+  public async createMessage(input: CreateMessageRequestInput): Promise<MessageWithPersonsDto> {
     if (!input.threadId) {
       const threadId = await this.createThread(input);
       input.threadId = threadId;
     }
     const message = await this.messagesDataProvider.createMessage(input);
-    await this.messagesDataProvider.createMessagePerson({
+    const sender = await this.messagesDataProvider.createMessagePerson({
       personId: input.senderId,
       messageId: message.id,
       typeOfMessagePerson: TypeOfMessagePerson.SENDER
     });
-    await this.messagesDataProvider.createMessagePerson({
+    const recipient = await this.messagesDataProvider.createMessagePerson({
       personId: input.recipientId,
       messageId: message.id,
       typeOfMessagePerson: TypeOfMessagePerson.RECIPIENT
     });
-    return mapMessageDaoToDto(message);
+    return mapMessageWithPersonDaoToDto(message, [sender, recipient]);
   }
 
   public async createThread(input: CreateMessageRequestInput): Promise<string> {
@@ -33,8 +33,9 @@ export class MessagesService {
     return thread.id;
   }
 
-  public async updateMessage(input: UpdateMessageRequestInput, messageId: string): Promise<MessageDto> {
+  public async updateMessage(input: UpdateMessageRequestInput, messageId: string): Promise<MessageWithPersonsDto> {
     const updatedMessage = await this.messagesDataProvider.updateMessage(input, messageId);
-    return mapMessageDaoToDto(updatedMessage);
+    const messagesPersons = await this.messagesDataProvider.getMessagesPersonsByMessageId(messageId);
+    return mapMessageWithPersonDaoToDto(updatedMessage, messagesPersons);
   }
 }

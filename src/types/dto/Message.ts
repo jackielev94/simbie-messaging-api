@@ -1,4 +1,4 @@
-import { MessageDao, TypeOfMessagePerson } from "../dao";
+import { MessageDao, MessagePersonDao, TypeOfMessagePerson } from "../dao";
 
 export interface MessageDto {
   id: string;
@@ -8,14 +8,20 @@ export interface MessageDto {
   read: boolean;
 }
 
+export interface MessagePersonDto {
+  id: string;
+  nameFirst: string;
+  nameLast: string;
+}
+
 export interface MessageWithPersonsDto {
   id: string;
   content: string;
   threadId: string;
   created: string;
   read: boolean;
-  senderId: string;
-  recipientId: string;
+  sender: MessagePersonDto;
+  recipient: MessagePersonDto;
 }
 
 export interface CreateMessageInput {
@@ -33,12 +39,24 @@ export interface UpdateMessageInput {
   read: boolean;
 }
 
-export function mapMessageDaoToDto(messageDao: MessageDao): MessageDto {
+export function mapMessageWithPersonDaoToDto(messageDao: MessageDao, messagePersonsDao: Array<MessagePersonDao>): MessageWithPersonsDto {
+  const sender = messagePersonsDao.find(mp => mp.person_role === TypeOfMessagePerson.SENDER);
+  const recipient =  messagePersonsDao.find(mp => mp.person_role === TypeOfMessagePerson.RECIPIENT);
   return {
     id: messageDao.id,
     content: messageDao.content,
     threadId: messageDao.thread_id,
     created: messageDao.created,
-    read: messageDao.read
+    read: messageDao.read,
+    sender: {
+      id: sender.id,
+      nameFirst: sender.name_first,
+      nameLast: sender.name_last
+    },
+    recipient: {
+      id: recipient.id,
+      nameFirst: recipient.name_first,
+      nameLast: recipient.name_last
+    }
   }
 }

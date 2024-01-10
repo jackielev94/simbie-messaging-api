@@ -33,6 +33,7 @@ export class ThreadsDataProvider {
       join ${threads_persons_table_name} tp
       on t.id = tp.thread_id
       where tp.person_id = $1
+      order by created desc
     `;
     return simpleQuery(query, [personId])
   }

@@ -1,6 +1,6 @@
 import { simpleQuery, simpleQuerySingleResult } from "../db";
 import { MessageDao, MessagePersonDao, CreateMessageInput, CreateMessagePersonInput, UpdateMessageInput } from "../types";
-import { messages_persons_table_name, messages_table_name } from "./constants";
+import { messages_persons_table_name, messages_table_name, persons_table_name } from "./constants";
 
 export class MessagesDataProvider {
   public async createMessage(input: CreateMessageInput): Promise<MessageDao> {
@@ -42,7 +42,14 @@ export class MessagesDataProvider {
 
   public async getMessagesPersonsByMessageId(messageId: string): Promise<Array<MessagePersonDao>> {
     const query = `
-      select * from ${messages_persons_table_name}
+      select mp.person_role,
+      mp.message_id as message_id,
+      p.name_first as name_first,
+      p.name_last as name_last,
+      p.id as person_id
+      from ${messages_persons_table_name} mp
+      join ${persons_table_name} p
+      on mp.person_id = p.id
       where message_id = $1
     `;
     return simpleQuery(query, [ messageId ]);

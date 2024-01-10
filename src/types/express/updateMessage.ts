@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { MessageDto } from "../dto";
+import { MessageWithPersonsDto } from "../dto";
 
 export type UpdateMessageRequestInput = {
   read: boolean;
@@ -15,6 +15,6 @@ export type UpdateMessageRequest = Request<
   UpdateMessageRequestInput
 >;
 
-export type UpdateMessageResponseBody = MessageDto;
+export type UpdateMessageResponseBody = MessageWithPersonsDto;
 
 export type UpdateMessageResponse = Response<UpdateMessageResponseBody>;

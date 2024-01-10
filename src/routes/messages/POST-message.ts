@@ -8,7 +8,7 @@ export const createMessage = Router().use(
   validatePayload({
     body: Joi.object({
       content: Joi.string().required(),
-      threadId: Joi.string().uuid(),
+      threadId: Joi.string().uuid().allow(null),
       senderId: Joi.string().uuid().required(),
       recipientId: Joi.string().uuid().required()
     })

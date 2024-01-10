@@ -1,5 +1,5 @@
 import { AccountsDataProvider } from "../dataProviders";
-import { LoginRequestQuery, LoginSuccess } from "../types";
+import { LoginRequestQuery, LoginSuccess, mapAccountWithPersonDaoToDto } from "../types";
 
 export class AuthenticationService {
   public constructor(
@@ -7,10 +7,11 @@ export class AuthenticationService {
   ) {}
 
   public async getAccountByEmailAndPassword(input: LoginRequestQuery): Promise<LoginSuccess> {
-    const account =  this.accountsDataProvider.getAccountByEmailAndPassword(input);
+    const account =  await this.accountsDataProvider.getAccountByEmailAndPassword(input);
     if (account) {
       return {
-        success: true
+        success: true,
+        account: mapAccountWithPersonDaoToDto(account)
       }
     }
     return {

@@ -7,4 +7,4 @@ export const rootRouter = Router();
 
 rootRouter.use("/messages", messagesRouter);
 rootRouter.use("/persons", personsRouter)
-rootRouter.use("/authenticate", authenticationRouter)
+rootRouter.use("/authentication", authenticationRouter)

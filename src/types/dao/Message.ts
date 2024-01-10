@@ -16,5 +16,7 @@ export interface MessagePersonDao {
   id: string;
   person_id: string;
   message_id: string;
-  person_role: TypeOfMessagePerson
+  person_role: TypeOfMessagePerson,
+  name_first: string;
+  name_last: string;
 }
