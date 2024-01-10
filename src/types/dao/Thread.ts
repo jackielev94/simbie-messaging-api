@@ -2,6 +2,7 @@
 export interface ThreadDao {
   id: string;
   created: string;
+  subject: string;
 }
 
 export interface ThreadPersonDao {

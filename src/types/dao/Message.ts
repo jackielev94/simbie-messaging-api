@@ -10,6 +10,7 @@ export interface MessageDao {
   thread_id: string;
   created: string;
   read: boolean;
+  subject: string;
 }
 
 export interface MessagePersonDao {

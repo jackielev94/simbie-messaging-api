@@ -6,6 +6,7 @@ export interface MessageDto {
   threadId: string;
   created: string;
   read: boolean;
+  subject: string;
 }
 
 export interface MessagePersonDto {
@@ -27,6 +28,7 @@ export interface MessageWithPersonsDto {
 export interface CreateMessageInput {
   content: string;
   threadId: string;
+  subject: string | null;
 }
 
 export interface CreateMessagePersonInput {

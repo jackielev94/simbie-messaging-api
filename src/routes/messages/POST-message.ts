@@ -10,6 +10,7 @@ export const createMessage = Router().use(
       content: Joi.string().required(),
       threadId: Joi.string().uuid().allow(null),
       senderId: Joi.string().uuid().required(),
+      subject: Joi.string().allow(null),
       recipientId: Joi.string().uuid().required()
     })
   }),

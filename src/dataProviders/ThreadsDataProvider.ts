@@ -3,14 +3,15 @@ import { ThreadDao, ThreadPersonDao } from "../types";
 import { threads_table_name, threads_persons_table_name } from "./constants";
 
 export class ThreadsDataProvider {
-  public async createThread(): Promise<ThreadDao> {
+  public async createThread(subject: string): Promise<ThreadDao> {
     const query = `
       insert into ${threads_table_name}
-      (id, created)
-      values (default, default)
+      (subject)
+      values ($1)
       returning *
     `;
-    return simpleQuerySingleResult(query, []);
+    return simpleQuerySingleResult(query, [ subject ?? "Empty Subject",
+  ]);
   }
 
   public async createThreadPerson(threadId: string, personId: string): Promise<ThreadPersonDao> {

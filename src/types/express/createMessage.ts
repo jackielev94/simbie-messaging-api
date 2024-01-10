@@ -6,6 +6,7 @@ export type CreateMessageRequestInput = {
   threadId: string;
   senderId: string;
   recipientId: string;
+  subject: string | null;
 }
 
 export type CreateMessageRequest = Request<

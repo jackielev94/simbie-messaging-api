@@ -15,7 +15,8 @@ export class ThreadsService {
       return {
         id: thread.id,
         created: thread.created,
-        messages: messagesWithPersons
+        messages: messagesWithPersons,
+        subject: thread.subject
       }
     }))
   }
@@ -31,6 +32,7 @@ export class ThreadsService {
         created: message.created,
         read: message.read,
         threadId: message.thread_id,
+        subject: message.subject,
         sender: {
           id: sender.person_id,
           nameFirst: sender.name_first,
