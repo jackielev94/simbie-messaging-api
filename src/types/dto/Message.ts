@@ -49,12 +49,12 @@ export function mapMessageWithPersonDaoToDto(messageDao: MessageDao, messagePers
     created: messageDao.created,
     read: messageDao.read,
     sender: {
-      id: sender.id,
+      id: sender.person_id,
       nameFirst: sender.name_first,
       nameLast: sender.name_last
     },
     recipient: {
-      id: recipient.id,
+      id: recipient.person_id,
       nameFirst: recipient.name_first,
       nameLast: recipient.name_last
     }

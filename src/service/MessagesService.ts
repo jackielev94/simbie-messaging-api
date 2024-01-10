@@ -38,4 +38,16 @@ export class MessagesService {
     const messagesPersons = await this.messagesDataProvider.getMessagesPersonsByMessageId(messageId);
     return mapMessageWithPersonDaoToDto(updatedMessage, messagesPersons);
   }
+
+  public async getMessagesWithPersonsByThreadId(threadId: string): Promise<Array<MessageWithPersonsDto>> {
+    const messagesToReturn: Array<MessageWithPersonsDto> = [];
+    const messages = await this.messagesDataProvider.getMessagesByThreadId(threadId);
+
+    await Promise.all(messages.map(async (message)=> {
+      const messagePersons = await this.messagesDataProvider.getMessagesPersonsByMessageId(message.id);
+      messagesToReturn.push(mapMessageWithPersonDaoToDto(message, messagePersons))
+    }))
+
+    return messagesToReturn
+  }
 }
