@@ -28,6 +28,7 @@ export class MessagesService {
 
   public async createThread(input: CreateMessageRequestInput): Promise<string> {
     const thread = await this.threadsDataProvider.createThread(input.subject);
+    console.log("thread: ", thread, input)
     await this.threadsDataProvider.createThreadPerson(thread.id, input.senderId);
     await this.threadsDataProvider.createThreadPerson(thread.id, input.recipientId);
     return thread.id;
