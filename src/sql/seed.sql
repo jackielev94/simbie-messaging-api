@@ -16,6 +16,6 @@ insert into persons (email, name_first, name_last, phone, account_id)
 insert into persons (email, name_first, name_last, phone, account_id)
 (select email, 'Derek', 'McDreamy', '1234567890', id from accounts a where a.email = 'testprovider1@email.com');
 insert into persons (email, name_first, name_last, phone, account_id)
-(select email, 'Elliot', 'Reid', '1234567890', id from accounts a where a.email = 'testprovider1@email.com');
+(select email, 'Elliot', 'Reid', '1234567890', id from accounts a where a.email = 'testprovider2@email.com');
 insert into persons (email, name_first, name_last, phone, account_id)
-(select email, 'John', 'Carter', '1234567890', id from accounts a where a.email = 'testprovider1@email.com');
+(select email, 'John', 'Carter', '1234567890', id from accounts a where a.email = 'testprovider3@email.com');
