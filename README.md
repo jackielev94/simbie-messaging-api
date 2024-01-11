@@ -28,3 +28,6 @@ Trade-offs:
 * Clinics: I did not create a 'clinic' data layer, so a patient can send messages to all providers in the system, and a provider can send messages to all patients for now. This is something that should be easily expandable in the future.
 * Authentication: I decided not to use any sort of authentication library like ```passport.js``` for sake of time. I figured a more robust solution would be ideal anyway like an auth0 or some other third party, and decided to just mock a login process for now.
 * Testing: I would've liked to include some unit tests, but didn't really have time to put them together and wanted to focus on getting as much code up as possible instead.
+
+## Demo
+See video demos here: **https://drive.google.com/file/d/1LIDrUBZINZpag5iHsQsqNYnU38p8s7E7/view?usp=sharing**
